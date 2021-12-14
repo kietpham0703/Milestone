@@ -13,13 +13,20 @@ pipeline {
         sh 'ls'
       }
     }
-    stage('BUILD') {
+
+    stage('SonnarQube Scanner') {
+      steps {
+         withSonarQubeEnv('SonarQube') {
+             sh 'mvn clean verify sonar:sonar -Dsonar.login=183183cc65dc440092a8e2b7b84a183c'
+            }
+         }
+     }
+         stage('BUILD') {
       steps {
        withMaven(maven : 'mvn-3.6.3') {
             sh "mvn install"
         }
       }
     }
-
   }
 }
