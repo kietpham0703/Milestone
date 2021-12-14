@@ -14,13 +14,15 @@ pipeline {
       }
     }
 
-    stage('SonnarQube Scanner') {
+  stage('SonarQube analysis') {
       steps {
-         withSonarQubeEnv('SonarQube') {
-             sh 'mvn clean verify sonar:sonar -Dsonar.login=183183cc65dc440092a8e2b7b84a183c'
-            }
-         }
-     }
+        withSonarQubeEnv(credentialsId: 'sonarqube-secret', installationName: 'sonarqube-server') {
+          withMaven(maven : 'mvn-3.6.3') {
+            sh 'mvn sonar:sonar -Dsonar.dependencyCheck.jsonReportPath=target/dependency-check-report.json -Dsonar.dependencyCheck.xmlReportPath=target/dependency-check-report.xml -Dsonar.dependencyCheck.htmlReportPath=target/dependency-check-report.html'
+          }
+        }
+      }
+    }
          stage('BUILD') {
       steps {
        withMaven(maven : 'mvn-3.6.3') {
