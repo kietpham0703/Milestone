@@ -136,8 +136,8 @@
    		<artifactId>dependency-check-maven</artifactId>
     		<version>5.2.2</version>
     		<configuration>
-        		<cveUrlModified>https://www.lhorn.de/nist/nvdcve-1.1-2019.json.gz</cveUrlModified>
-        		<cveUrlBase>https://www.lhorn.de/nist/nvdcve-1.1-2019.json.gz</cveUrlBase>
+        		<cveUrlModified>https://nvd.nist.gov/feeds/json/cve/1.1/nvdcve-1.1-2021.json.gz</cveUrlModified>
+        		<cveUrlBase>https://nvd.nist.gov/feeds/json/cve/1.1/nvdcve-1.1-2021.json.gz</cveUrlBase>
     		</configuration>
     		<executions>
         		<execution>
