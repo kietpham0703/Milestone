@@ -15,8 +15,10 @@ pipeline {
     }
     stage('BUILD') {
       steps {
-          sh "mvn install"
-        
+       withMaven(maven : 'mvn-3.6.3') {
+            sh 'ls server'
+            sh "mvn war:exploded -f 'server/pom.xml'"
+        }
       }
     }
 
