@@ -1,8 +1,8 @@
 pipeline {
   agent any
-  env.JAVA_HOME = "openjdk-11.0.1_linux-x64_bin"
+
   tools {
-    jdk 'openjdk-11.0.1_linux-x64_bin'
+    jdk 'jdk'
     maven 'mvn-3.6.3'
     
   }
