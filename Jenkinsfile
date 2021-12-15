@@ -4,10 +4,10 @@ pipeline {
   agent any
    
 environment {
-        PROJECT_ID = 'glowing-space-327311'
+        PROJECT_ID = 'kube123-335219'
         LOCATION = 'asia-southeast1-a'
         CREDENTIALS_ID = 'gke'
-        CLUSTER_NAME = 'gkedeploy'          
+        CLUSTER_NAME = 'gke1'          
     }  
    
   tools {
