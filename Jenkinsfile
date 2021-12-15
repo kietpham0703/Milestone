@@ -2,7 +2,14 @@
    
 pipeline {
   agent any
-
+   
+environment {
+        PROJECT_ID = 'glowing-space-327311'
+        LOCATION = 'asia-southeast1-a'
+        CREDENTIALS_ID = 'gke'
+        CLUSTER_NAME = 'gkedeploy'          
+    }  
+   
   tools {
     jdk 'jdk'
     maven 'mvn-3.6.3'
@@ -47,13 +54,12 @@ pipeline {
       } 
     }
 
-    stage('Anchore analyse') {
+    stage('Deploy to GKE') {
       steps {
-        writeFile file: 'anchore_images', text: 'docker.io/ptuankiet40/spring-boot-demo'
-        anchore name: 'anchore_images'
-      }
-    }
-
+       step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'k8s.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+       }
+     }
+     
     stage('Deploy to K8s') {
       steps {
         withKubeConfig([credentialsId: 'kubernetes-config']) {
