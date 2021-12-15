@@ -1,21 +1,23 @@
+
+   
 pipeline {
   agent any
 
   tools {
     jdk 'jdk'
     maven 'mvn-3.6.3'
-    
   }
 
-         stage('BUILD') {
+  stages {
+    stage('Build') {
       steps {
-       withMaven(maven : 'mvn-3.6.3') {
-            sh "mvn install"
+        withMaven(maven : 'mvn-3.6.3') {
+          sh "mvn install"
         }
       }
     }
-  
-  stage ('OWASP Dependency-Check Vulnerabilities') {
+
+    stage ('OWASP Dependency-Check Vulnerabilities') {
       steps {
         withMaven(maven : 'mvn-3.6.3') {
           sh 'mvn dependency-check:check'
@@ -61,6 +63,5 @@ pipeline {
         }
       } 
     }
-  
   }
 }
